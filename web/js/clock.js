@@ -63,6 +63,7 @@ Time = {
             s--;
             second.innerHTML = s + "";
             if (s <= 0) {
+                s=1;
                 location.href = "http://www.kinggm520.cn";   //这里可以设置成你需要跳转的主页
             }
         },1000)

@@ -16,7 +16,68 @@
     <script src="js/jquery-2.1.0.min.js"></script>
     <!-- 3. 导入bootstrap的js文件 -->
     <script src="js/bootstrap.min.js"></script>
+    <%--弹出框--%>
+    <link rel="stylesheet" type="text/css" href="blackbox/css/blackbox.css" media="screen"/>
+    <script type="text/javascript" src="blackbox/js/jquery.blackbox.min.js"></script>
+
     <script type="text/javascript">
+        //实例化弹框
+        var box = new BlackBox();
+
+        window.onload = function () {
+
+            document.getElementById("form").onsubmit = function () {
+                //验证用户名
+                //验证密码
+                //...
+                //都成功则返回true
+                //
+                return checkUserName()&&checkPassword();
+
+            }
+
+        };
+
+        function checkUserName() {
+            var flag = false;
+            var username = document.getElementById("username").value;
+            var reg_username =/^[\s\S]*.*[^\s][\s\S]*$/;
+            flag = reg_username.test(username);
+            if (!flag) {
+                // 验证失败
+                box.alert("用户名不能为空", {
+                    title: '格式不正确',
+                    value: '重新输入'
+                })
+
+            } else {
+            }
+            return flag;
+        }
+
+        function checkPassword() {
+            var flag = false;
+            var password = document.getElementById("password").value;
+            var reg_username = /^[\s\S]*.*[^\s][\s\S]*$/;
+            flag = reg_username.test(password);
+            if (!flag) {
+                // 验证失败
+                box.alert("密码不能为空", {
+                    title: '格式不正确',
+                    value: '重新输入'
+                })
+
+            } else {
+            }
+            return flag;
+        }
+
+
+
+
+
+
+
         //切换验证码
         function refreshCode(){
             //1.获取验证码图片对象
@@ -25,21 +86,23 @@
             //2.设置其src属性，加时间戳
             vcode.src = "${pageContext.request.contextPath}/checkCodeServlet?time="+new Date().getTime();
         }
+
+
     </script>
 
 </head>
 <body>
 <div class="container" style="width: 400px;">
     <h3 style="text-align: center;">管理员登录</h3>
-    <form action="${pageContext.request.contextPath}/loginServlet" method="post">
+    <form id="form" action="${pageContext.request.contextPath}/loginServlet" method="post">
         <div class="form-group">
-            <label for="user">用户名：</label>
-            <input type="text" name="username" class="form-control" id="user" placeholder="请输入用户名"/>
+            <label for="username">用户名：</label>
+            <input type="text" name="username" onblur="checkUserName()" class="form-control" id="username" placeholder="请输入用户名"/>
         </div>
 
         <div class="form-group">
             <label for="password">密码：</label>
-            <input type="password" name="password" class="form-control" id="password" placeholder="请输入密码"/>
+            <input type="password" name="password" onblur="checkPassword()" class="form-control" id="password" placeholder="请输入密码"/>
         </div>
 
         <div class="form-inline">

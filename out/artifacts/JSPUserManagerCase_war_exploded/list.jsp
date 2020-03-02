@@ -20,6 +20,7 @@
     <script src="js/jquery-2.1.0.min.js"></script>
     <!-- 3. 导入bootstrap的js文件 -->
     <script src="js/bootstrap.min.js"></script>
+    <%--弹出框--%>
     <link rel="stylesheet" type="text/css" href="blackbox/css/blackbox.css" media="screen"/>
     <script type="text/javascript" src="blackbox/js/jquery.blackbox.min.js"></script>
 
